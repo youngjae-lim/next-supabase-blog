@@ -8,6 +8,13 @@ export default function Home() {
 
   useEffect(() => {
     fetchPosts()
+
+    const mySubscription = supabase
+      .from('posts')
+      .on('*', () => fetchPosts())
+      .subscribe()
+
+    return () => supabase.removeSubscription(mySubscription)
   }, [])
 
   async function fetchPosts() {
