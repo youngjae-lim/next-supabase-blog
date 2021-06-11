@@ -6,11 +6,13 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { supabase } from '../lib/initSupabase'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState(null)
+  const router = useRouter()
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(async () =>
@@ -29,7 +31,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <div>
-      <nav className='p-6 border-b border-gray-300'>
+      <nav className='p-6 border-b bg-blue-300 border-gray-300'>
         <Link href='/'>
           <span className='mr-6 cursor-pointer'>Home</span>
         </Link>
@@ -44,7 +46,9 @@ function MyApp({ Component, pageProps }) {
           </Link>
         )}
         <Link href='/profile'>
-          <span className='mr-6 cursor-pointer'>Profile</span>
+          <span className='mr-6 cursor-pointer'>
+            {user ? 'Profile' : 'Login'}
+          </span>
         </Link>
         {user && (
           <button
@@ -52,13 +56,14 @@ function MyApp({ Component, pageProps }) {
             onClick={async () => {
               const { error } = await supabase.auth.signOut()
               if (error) console.log('Error logging out:', error.message)
+              router.push('/profile')
             }}
           >
             Logout
           </button>
         )}
       </nav>
-      <div className='py-8 px-16'>
+      <div className='h-full px-10 py-4 bg-gray-50'>
         <Component {...pageProps} />
       </div>
     </div>

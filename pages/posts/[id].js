@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import ReactMarkDown from 'react-markdown'
-import { supabase } from '../../api'
+import { supabase } from '../../lib/initSupabase'
 import CodeBlock from '../../components/CodeBlock'
 
 export default function Post({ post }) {

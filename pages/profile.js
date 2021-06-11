@@ -14,7 +14,7 @@ function Profile(props) {
   if (user)
     return (
       <>
-        <div className="w-full flex gap-2 sm:flex-col">
+        <div className="w-full h-full flex gap-2 sm:flex-col">
           <Text>Singed in: {user.email}</Text>
           <Button block onClick={() => props.supabaseClient.auth.signOut()}>
             Sign out
@@ -35,7 +35,7 @@ export default function AuthProfile() {
             supabaseClient={supabase}
             providers={['google', 'github', 'facebook', 'twitter']}
             socialLayout='horizontal'
-            socialButtonSize='xlarge'
+            socialButtonSize='small'
           />
         </Profile>
       </Auth.UserContextProvider>
