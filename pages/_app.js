@@ -4,7 +4,6 @@
 // Finally it implements a listener for any auth events.
 // And when a new auth event occurs, we'll check to make sure there is currently a signed in user in order to show or hide the Create Post link.
 
-import App from 'next/app'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { supabase } from '../api'
