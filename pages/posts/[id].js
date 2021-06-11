@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import ReactMarkDown from 'react-markdown'
 import { supabase } from '../../api'
+import CodeBlock from '../../components/CodeBlock'
 
 export default function Post({ post }) {
   const router = useRouter()
@@ -11,10 +12,18 @@ export default function Post({ post }) {
 
   return (
     <div>
-      <h1 className="text-5xl mt-4 font-semibold tracking-wide">{post.title}</h1>
-      <p className="text-sm font-light my-4">by {post.user_email}</p>
-      <div className="mt-8">
-        <ReactMarkDown className="prose" children={post.content} />
+      <h1 className='text-5xl mt-4 font-semibold tracking-wide'>
+        {post.title}
+      </h1>
+      <p className='text-sm font-light my-4'>by {post.user_email}</p>
+      <div className='mt-8'>
+        {
+          <ReactMarkDown
+            className='prose'
+            children={post.content}
+            components={CodeBlock}
+          />
+        }
       </div>
     </div>
   )

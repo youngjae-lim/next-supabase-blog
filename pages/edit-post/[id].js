@@ -48,7 +48,7 @@ function EditPost() {
   async function updateCurrentPost() {
     if (!title || !content) return
 
-    await supabase.from('posts').update([{ title, content }])
+    await supabase.from('posts').update([{ title, content }]).eq('id', id)
 
     router.push('/my-posts')
   }
