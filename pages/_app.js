@@ -6,7 +6,7 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { supabase } from '../api'
+import { supabase } from '../lib/initSupabase'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
@@ -46,6 +46,17 @@ function MyApp({ Component, pageProps }) {
         <Link href='/profile'>
           <span className='mr-6 cursor-pointer'>Profile</span>
         </Link>
+        {user && (
+          <button
+            className='btn-black mr-6 cursor-pointer'
+            onClick={async () => {
+              const { error } = await supabase.auth.signOut()
+              if (error) console.log('Error logging out:', error.message)
+            }}
+          >
+            Logout
+          </button>
+        )}
       </nav>
       <div className='py-8 px-16'>
         <Component {...pageProps} />

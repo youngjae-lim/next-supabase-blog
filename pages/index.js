@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { supabase } from '../api'
+import { supabase } from '../lib/initSupabase'
 
 export default function Home() {
   const [posts, setPosts] = useState([])
